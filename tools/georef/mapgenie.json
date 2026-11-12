@@ -1,0 +1,11 @@
+{
+ "about": "CabbySteps: where Map Genie's map sits on the game's six painted map sheets (journey.json), from tools/georef/register_mapgenie.py. Map Genie's map is those sheets stacked and scaled down; a pixel of it (canonical: the 2048-wide map.png; the 4096-wide one is 2x) is (sx * u + ox, oy - sy * v), with (u, v) in the ending's units (journey.json): u = x / 512 across the world loop, v = (0.5 y + 0.866 z) / 512 up the sheets.",
+ "width": 2048,
+ "sx": 655.3587,
+ "ox": 696.2581,
+ "sy": 655.3079,
+ "oy": 5186.6299,
+ "tiles": 276,
+ "residualMedianPx": 0.022,
+ "residualMaxPx": 0.066
+}

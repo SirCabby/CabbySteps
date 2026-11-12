@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Offline checks for the mod's pure logic (projection, world loop, map view, completed
+    POIs kept per save, saved locations, where summoned items are put down, Grippy feet's
+    balance outline and levels, Extreme grip's rule for each foot, Hold tight's rule for what
+    the game may still take from Nate, files kept under the mod's old name, JSON), run by
+    `make test`. The mod's own source files are compiled here against tiny stand-ins
+    for the Unity and MelonLoader types they touch (Stubs.cs), so no game is needed.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>Major</RollForward>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../src/Map/MapProjection.cs" Link="Mod/MapProjection.cs" />
+    <Compile Include="../../src/World/WorldLoop.cs" Link="Mod/WorldLoop.cs" />
+    <Compile Include="../../src/Util/Fast.cs" Link="Mod/Fast.cs" />
+    <Compile Include="../../src/Util/MiniJson.cs" Link="Mod/MiniJson.cs" />
+    <Compile Include="../../src/Map/Poi.cs" Link="Mod/Poi.cs" />
+    <Compile Include="../../src/Map/MapView.cs" Link="Mod/MapView.cs" />
+    <Compile Include="../../src/Map/PoiProgress.cs" Link="Mod/PoiProgress.cs" />
+    <Compile Include="../../src/Map/SavedLocations.cs" Link="Mod/SavedLocations.cs" />
+    <Compile Include="../../src/UI/NameEntry.cs" Link="Mod/NameEntry.cs" />
+    <Compile Include="../../src/World/SummonSpot.cs" Link="Mod/SummonSpot.cs" />
+    <Compile Include="../../src/World/ArrivalGate.cs" Link="Mod/ArrivalGate.cs" />
+    <Compile Include="../../src/World/CarryPlan.cs" Link="Mod/CarryPlan.cs" />
+    <Compile Include="../../src/World/SupportPolygon.cs" Link="Mod/SupportPolygon.cs" />
+    <Compile Include="../../src/World/FootGrip.cs" Link="Mod/FootGrip.cs" />
+    <Compile Include="../../src/World/GripLevels.cs" Link="Mod/GripLevels.cs" />
+    <Compile Include="../../src/World/HoldRules.cs" Link="Mod/HoldRules.cs" />
+    <Compile Include="../../src/World/JourneyPath.cs" Link="Mod/JourneyPath.cs" />
+    <Compile Include="../../src/Util/RenamedFiles.cs" Link="Mod/RenamedFiles.cs" />
+  </ItemGroup>
+
+</Project>

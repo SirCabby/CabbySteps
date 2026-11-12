@@ -1,0 +1,116 @@
+{
+  "about": "CabbySteps: the game's ending Hero's Journey layout, from tools/georef/find_journey.py. Units are the ending's: a path point (x, y) sits at (x, y) here, x 0..1 across the world loop, y up the mountain. material = the game's Addressables key; texture = its painting's property.",
+  "camera": {
+    "y": 0.305,
+    "distance": 0.883,
+    "fov": 60.0
+  },
+  "board": {
+    "name": "Wood",
+    "material": "72b9a19bbb5f082428f4e4c01a904990",
+    "texture": "_AlbedoMap",
+    "painting": "Cracked_Wooden_Planks_ui2leaxlw_2K_BaseColor",
+    "x": 0.497,
+    "y": 3.68,
+    "w": 1.4291,
+    "h": 9.375
+  },
+  "sheets": [
+    {
+      "name": "Map0",
+      "material": "5b3eda7159cd05a429eabcbea2607c7a",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble05",
+      "x": 0.5,
+      "y": 0.6881,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    },
+    {
+      "name": "Map1",
+      "material": "957cda5583b172149944d9591da9a634",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble04",
+      "x": 0.5,
+      "y": 1.85996,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": 2e-05,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    },
+    {
+      "name": "Map2",
+      "material": "9138303eb48329444b09bef674bc9a50",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble03",
+      "x": 0.5,
+      "y": 3.03186,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    },
+    {
+      "name": "Map3",
+      "material": "4f4207e38d16d4241ab167f82c0cdfba",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble02",
+      "x": 0.5,
+      "y": 4.20376,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": -2e-05,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    },
+    {
+      "name": "Map4",
+      "material": "71f77136d29706b449334e356c96910a",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble01",
+      "x": 0.5,
+      "y": 5.3756,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": 1e-05,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    },
+    {
+      "name": "Map5",
+      "material": "0cb48394fa3c49842b69719e6ec03279",
+      "texture": "_AlbedoMap",
+      "painting": "Assemble00",
+      "x": 0.5,
+      "y": 6.5475,
+      "w": 1.17188,
+      "h": 1.17188,
+      "shadow": {
+        "x": 0.0,
+        "y": -1e-05,
+        "w": 1.00788,
+        "h": 1.0
+      }
+    }
+  ]
+}

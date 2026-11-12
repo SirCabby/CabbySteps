@@ -1,0 +1,11 @@
+<!--
+  Copy this file to GameDir.local.props (same folder) and set the path to YOUR
+  Baby Steps install, the folder that contains BabySteps.exe and MelonLoader/.
+  GameDir.local.props is gitignored. Only needed if the game isn't in the
+  default Steam library for your OS.
+-->
+<Project>
+  <PropertyGroup>
+    <GameDir>D:\SteamLibrary\steamapps\common\Baby Steps</GameDir>
+  </PropertyGroup>
+</Project>

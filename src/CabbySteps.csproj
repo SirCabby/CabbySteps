@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    CabbySteps - a MelonLoader mod for Baby Steps (Unity 2022.3, IL2CPP), grown from Slylos's
+    Baby Steps MiniMap and QOL Features (https://www.nexusmods.com/babysteps/mods/14).
+
+    The build compiles against the interop assemblies MelonLoader generates
+    inside the game folder, so the game must have MelonLoader installed and
+    must have been launched once. The game folder defaults to the usual Steam
+    location for your OS. If yours lives elsewhere, copy
+    GameDir.local.props.example (repo root) to GameDir.local.props and set
+    <GameDir> there; that file is gitignored. `make ... GAME_DIR=...` also works.
+  -->
+  <Import Project="$(MSBuildThisFileDirectory)../GameDir.local.props" Condition="Exists('$(MSBuildThisFileDirectory)../GameDir.local.props')" />
+
+  <PropertyGroup>
+    <!-- MelonLoader 0.7 runs IL2CPP mods on .NET 6. -->
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>CabbySteps</AssemblyName>
+    <RootNamespace>CabbySteps</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- MelonLoader loads the DLL directly; no deps.json needed. -->
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+
+    <!-- The mod's own version is the MelonInfo attribute in Core.cs. No
+         <Version> is set here, so the assembly keeps the SDK default (1.0.0.0),
+         as the shipped DLL did. -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+    <!-- Build output goes to <repo>/build/, whether built by make or an IDE. -->
+    <OutDir>$(MSBuildThisFileDirectory)../build/</OutDir>
+
+    <!-- Embedded symbols put file:line numbers into exception traces in
+         MelonLoader/Latest.log. PathMap keeps local paths out of the binary. -->
+    <DebugType>embedded</DebugType>
+    <PathMap>$(MSBuildThisFileDirectory)=CabbySteps/src/</PathMap>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GameDir Condition="'$(GameDir)' == '' And '$(OS)' == 'Windows_NT'">C:\Program Files (x86)\Steam\steamapps\common\Baby Steps</GameDir>
+    <GameDir Condition="'$(GameDir)' == '' And '$(OS)' != 'Windows_NT'">$(HOME)/.local/share/Steam/steamapps/common/Baby Steps</GameDir>
+    <MelonLoaderDir>$(GameDir)/MelonLoader</MelonLoaderDir>
+    <MelonNet6Dir>$(MelonLoaderDir)/net6</MelonNet6Dir>
+    <Il2CppAssembliesDir>$(MelonLoaderDir)/Il2CppAssemblies</Il2CppAssembliesDir>
+  </PropertyGroup>
+
+  <!-- Everything here is provided by the game / MelonLoader at runtime, so none
+       of it is copied to the output (Private=false). -->
+  <ItemGroup>
+    <Reference Include="MelonLoader">                     <HintPath>$(MelonNet6Dir)/MelonLoader.dll</HintPath>                              <Private>false</Private></Reference>
+    <Reference Include="Il2CppInterop.Runtime">           <HintPath>$(MelonNet6Dir)/Il2CppInterop.Runtime.dll</HintPath>                    <Private>false</Private></Reference>
+    <Reference Include="0Harmony">                        <HintPath>$(MelonNet6Dir)/0Harmony.dll</HintPath>                                 <Private>false</Private></Reference>
+    <Reference Include="Il2CppInterop.Common">            <HintPath>$(MelonNet6Dir)/Il2CppInterop.Common.dll</HintPath>                     <Private>false</Private></Reference>
+    <Reference Include="Il2Cppmscorlib">                  <HintPath>$(Il2CppAssembliesDir)/Il2Cppmscorlib.dll</HintPath>                    <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule">          <HintPath>$(Il2CppAssembliesDir)/UnityEngine.CoreModule.dll</HintPath>            <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule">         <HintPath>$(Il2CppAssembliesDir)/UnityEngine.IMGUIModule.dll</HintPath>           <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"> <HintPath>$(Il2CppAssembliesDir)/UnityEngine.TextRenderingModule.dll</HintPath>   <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.ImageConversionModule"><HintPath>$(Il2CppAssembliesDir)/UnityEngine.ImageConversionModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.DirectorModule">      <HintPath>$(Il2CppAssembliesDir)/UnityEngine.DirectorModule.dll</HintPath>        <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule">     <HintPath>$(Il2CppAssembliesDir)/UnityEngine.AnimationModule.dll</HintPath>       <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule">       <HintPath>$(Il2CppAssembliesDir)/UnityEngine.PhysicsModule.dll</HintPath>         <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">   <HintPath>$(Il2CppAssembliesDir)/UnityEngine.InputLegacyModule.dll</HintPath>     <Private>false</Private></Reference>
+    <!-- Game code: PlayerMovement, Hat, Duckling, SaveGod (namespace Il2Cpp). -->
+    <Reference Include="Unity.Addressables">               <HintPath>$(Il2CppAssembliesDir)/Unity.Addressables.dll</HintPath>                <Private>false</Private></Reference>
+    <Reference Include="Unity.ResourceManager">            <HintPath>$(Il2CppAssembliesDir)/Unity.ResourceManager.dll</HintPath>             <Private>false</Private></Reference>
+    <Reference Include="Il2CppCoreGameLogic">             <HintPath>$(Il2CppAssembliesDir)/Il2CppCoreGameLogic.dll</HintPath>               <Private>false</Private></Reference>
+    <Reference Include="Il2CppCinemachine">               <HintPath>$(Il2CppAssembliesDir)/Il2CppCinemachine.dll</HintPath>                 <Private>false</Private></Reference>
+    <!-- The game's save system (SaveGod, SaveFile) is in Il2CppCoreGameLogic; where it stores
+         saves (PlatformService) is here. -->
+    <Reference Include="Il2CppBBSServices">               <HintPath>$(Il2CppAssembliesDir)/Il2CppBBSServices.dll</HintPath>                 <Private>false</Private></Reference>
+    <!-- Il2CppSystem's HashSet: the type of the save's "dialogs played" set. -->
+    <Reference Include="Il2CppSystem.Core">               <HintPath>$(Il2CppAssembliesDir)/Il2CppSystem.Core.dll</HintPath>                 <Private>false</Private></Reference>
+    <!-- HeldState, the type of the save's "held states" (items picked up). -->
+    <!-- Memory diagnostics: FMOD's memory counter (the game's audio), and AudioClip counts. -->
+    <Reference Include="Il2CppFMODUnity">                 <HintPath>$(Il2CppAssembliesDir)/Il2CppFMODUnity.dll</HintPath>                   <Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AudioModule">         <HintPath>$(Il2CppAssembliesDir)/UnityEngine.AudioModule.dll</HintPath>           <Private>false</Private></Reference>
+    <Reference Include="Il2CppExernalPlugins">            <HintPath>$(Il2CppAssembliesDir)/Il2CppExernalPlugins.dll</HintPath>              <Private>false</Private></Reference>
+    <!-- LayerCache: the game's own physics layer masks (what Nate stands on), used to put summoned items down. -->
+    <Reference Include="Il2CppToolTypesConsts">           <HintPath>$(Il2CppAssembliesDir)/Il2CppToolTypesConsts.dll</HintPath>             <Private>false</Private></Reference>
+  </ItemGroup>
+
+  <Target Name="CheckGameDir" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(MelonNet6Dir)/MelonLoader.dll')"
+           Text="MelonLoader not found under GameDir '$(GameDir)'. Install MelonLoader 0.7+ into the game, or point GameDir at your Baby Steps folder (see GameDir.local.props.example)." />
+    <Error Condition="!Exists('$(Il2CppAssembliesDir)/Il2CppCoreGameLogic.dll')"
+           Text="No Il2Cpp interop assemblies in '$(Il2CppAssembliesDir)'. Launch the game once with MelonLoader installed so it generates them, then build again." />
+  </Target>
+
+</Project>

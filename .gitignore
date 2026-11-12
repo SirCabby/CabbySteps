@@ -1,0 +1,20 @@
+# build output
+build/
+src/bin/
+src/obj/
+tests/*/bin/
+tests/*/obj/
+
+# per-machine game path (see GameDir.local.props.example)
+GameDir.local.props
+
+# the original mod's DLL and its decompiled source (Slylos's work, kept locally only;
+# make il-diff / install-original use it): https://www.nexusmods.com/babysteps/mods/14
+reference/
+
+# editors / tools
+.venv/
+.vs/
+.idea/
+*.user
+__pycache__/
